@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2019, David Yaffe
-# GPLv3 Licensed
+""" services.py
+Copyright (c) 2019, David Yaffe
+GPLv3 Licensed
+"""
 
 import re
 import csv
@@ -22,7 +24,7 @@ class Services2CSV:
         """ Docstring """
         self.servicelist = []
 
-    def readServices(self):
+    def readservices(self):
         """ Docstring """
 
         with open("/etc/services") as infile:
@@ -30,14 +32,14 @@ class Services2CSV:
                 if not line in ['\n', '\r\n'] or line[0] == "#":
                     result = re.match(self.pattern, line)
                 if result:
-                    serviceRow = result.groupdict()
-                    if serviceRow['alias']:
-                        serviceRow['alias'] = serviceRow['alias'].strip()
-                    if serviceRow['description']:
-                        serviceRow['description'] = serviceRow['description'].strip()
-                    self.servicelist.append(serviceRow)
+                    servicerow = result.groupdict()
+                    if servicerow['alias']:
+                        servicerow['alias'] = servicerow['alias'].strip()
+                    if servicerow['description']:
+                        servicerow['description'] = servicerow['description'].strip()
+                    self.servicelist.append(servicerow)
 
-    def writeServices(self):
+    def writeservices(self):
         """ Docstring """
 
         fieldnames = ['service', 'port', 'protocol', 'alias', 'description']
@@ -52,10 +54,11 @@ def main():
 
     desc = 'python script to convert /etc/services to either CSV or JSON'
     parser = argparse.ArgumentParser(description=desc)
-#    args = parser.parse_args()
+    parser.parse_args()
+
     ser = Services2CSV()
-    ser.readServices()
-    ser.writeServices()
+    ser.readservices()
+    ser.writeservices()
 
 if __name__ == '__main__':
     sys.exit(main())
