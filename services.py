@@ -50,11 +50,8 @@ class Services2CSV:
 def main():
     """ DocString """
 
-    desc = 'python script to convert /etc/services to either \
-            CSV or JSON'
+    desc = 'python script to convert /etc/services to either CSV or JSON'
     parser = argparse.ArgumentParser(description=desc)
-#    parser.add_argument('interface', help='interface to scan')
-#    parser.add_argument('-H', '--hosts', default='--localnet', help='host or network to scan')
 #    args = parser.parse_args()
     ser = Services2CSV()
     ser.readServices()
